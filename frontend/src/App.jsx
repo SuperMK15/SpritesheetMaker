@@ -9,6 +9,8 @@ function App() {
   const [images, setImages] = useState([]);
   const [spritesheetURL, setSpritesheetURL] = useState(null);
 
+  const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
   const handleFileUpload = (e) => {
     const files = e.target.files;
     const fileList = Array.from(files);
@@ -52,7 +54,7 @@ function App() {
     }
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/generate-spritesheet", {
+      const response = await axios.post(`${API}/generate-spritesheet`, {
         matrix,
         images: imageData,
         sprite_width: spriteWidth,
