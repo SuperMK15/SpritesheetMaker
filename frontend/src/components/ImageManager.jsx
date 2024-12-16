@@ -29,11 +29,11 @@ const ImageManager = ({ images, setImages, theme }) => {
 
     return (
         <div
-            className={`w-64 p-4 overflow-y-auto max-h-screen mt-4 ml-4 mb-4 ${
+            className={`rounded-lg w-64 p-4 overflow-y-auto max-h-screen mt-4 ml-4 mb-4 ${
                 theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-800"
             } shadow`}
         >
-            <h2 className="text-xl font-bold mb-4">Image Manager</h2>
+            <h2 className="text-xl font-bold mb-5 text-center">Image Manager</h2>
             <div className="mt-4 mb-6">
                 <label
                     htmlFor="file-upload"
