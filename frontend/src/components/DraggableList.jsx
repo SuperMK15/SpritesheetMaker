@@ -6,7 +6,7 @@ import { arrayMove } from "@dnd-kit/sortable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faGripVertical } from "@fortawesome/free-solid-svg-icons";
 
-function DraggableList({ images, setImages, handleDeleteImage }) {
+function DraggableList({ images, setImages, handleDeleteImage, theme }) {
   const handleDragEnd = (event) => {
     const { active, over } = event;
     if (active.id !== over?.id) {
@@ -33,6 +33,7 @@ function DraggableList({ images, setImages, handleDeleteImage }) {
               id={name}
               name={name}
               handleDeleteImage={handleDeleteImage}
+              theme={theme}
             />
           ))}
         </ul>
@@ -41,7 +42,7 @@ function DraggableList({ images, setImages, handleDeleteImage }) {
   );
 }
 
-function SortableItem({ id, name, handleDeleteImage }) {
+function SortableItem({ id, name, handleDeleteImage, theme }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
@@ -55,7 +56,9 @@ function SortableItem({ id, name, handleDeleteImage }) {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      className="flex justify-between items-center border-b pb-2 bg-white shadow p-2 rounded-lg"
+      className={`flex justify-between items-center border-b pb-2 shadow p-2 rounded-lg ${
+        theme === "dark" ? "bg-gray-800 text-white border-gray-600" : "bg-white text-gray-800 border-gray-200"
+      }`}
     >
       <div className="flex items-center space-x-2">
         {/* Drag handle */}

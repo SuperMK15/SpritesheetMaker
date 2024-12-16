@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus, faCogs } from "@fortawesome/free-solid-svg-icons";
 
-const MatrixEditor = ({ matrix, setMatrix, images }) => {
+const MatrixEditor = ({ matrix, setMatrix, images, theme }) => {
     useEffect(() => {
         setMatrix((prevMatrix) => {
             const updatedMatrix = prevMatrix.map((row) => row.map((cell) => {
@@ -46,10 +46,13 @@ const MatrixEditor = ({ matrix, setMatrix, images }) => {
             });
         });
         setMatrix(updatedMatrix);
-    }
+    };
 
     return (
-        <div className="bg-white p-4 shadow rounded-lg w-full max-w-3xl mb-6 overflow-x-auto">
+        <div
+            className={`${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+                } p-4 shadow rounded-lg w-full max-w-3xl mb-6 overflow-x-auto`}
+        >
             <div className="flex items-center mb-4">
                 <h2 className="text-xl font-bold mb-4">Arrange Files</h2>
                 <button
@@ -62,19 +65,24 @@ const MatrixEditor = ({ matrix, setMatrix, images }) => {
             </div>
 
             {matrix.map((row, rowIdx) => (
-                <div className="flex items-center space-x-2 mb-2" key={rowIdx}>
+                <div
+                    className="flex items-center space-x-2 mb-2"
+                    key={rowIdx}
+                >
                     <input
                         type="number"
                         value={row.length}
                         onChange={(e) => handleRowChange(rowIdx, e.target.value)}
-                        className="border p-2 rounded w-16"
+                        className={`border p-2 rounded w-16 ${theme === "dark" ? "bg-gray-700 text-white" : "bg-white text-gray-800"
+                            }`}
                     />
                     {row.map((cell, colIdx) => (
                         <div className="flex items-center" key={colIdx}>
                             <select
                                 value={cell}
                                 onChange={(e) => handleMatrixChange(rowIdx, colIdx, e.target.value)}
-                                className="p-2 border rounded w-40"
+                                className={`p-2 border rounded w-40 ${theme === "dark" ? "bg-gray-700 text-white" : "bg-white text-gray-800"
+                                    }`}
                             >
                                 <option value="">Select Image</option>
                                 {images.map(({ name }) => (
@@ -102,7 +110,7 @@ const MatrixEditor = ({ matrix, setMatrix, images }) => {
                 Add Row
             </button>
         </div>
-    )
-}
+    );
+};
 
-export default MatrixEditor
+export default MatrixEditor;

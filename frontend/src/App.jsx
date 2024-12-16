@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import ReactSwitch from "react-switch";
 
 import Title from "./components/Title";
+import ThemeToggle from "./components/ThemeToggle";
 import ImageManager from "./components/ImageManager";
 import MatrixEditor from "./components/MatrixEditor";
 import Settings from "./components/Settings";
@@ -13,21 +15,29 @@ function App() {
   const [padding, setPadding] = useState(null);
   const [images, setImages] = useState([]);
   const [spritesheetURL, setSpritesheetURL] = useState(null);
+  const [theme, setTheme] = useState("");
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'} flex`}>
       <ImageManager
         images={images}
         setImages={setImages}
+        theme={theme}
+      />
+
+      <ThemeToggle
+        theme={theme}
+        setTheme={setTheme}
       />
 
       <div className="flex-1 p-6 flex flex-col items-center">
-        <Title />
+        <Title theme={theme} />
 
         <MatrixEditor
           matrix={matrix}
           setMatrix={setMatrix}
           images={images}
+          theme={theme}
         />
 
         <Settings
@@ -37,6 +47,7 @@ function App() {
           setSpriteHeight={setSpriteHeight}
           padding={padding}
           setPadding={setPadding}
+          theme={theme}
         />
 
         <SpritesheetGenerator
@@ -47,6 +58,7 @@ function App() {
           setSpritesheetURL={setSpritesheetURL}
           images={images}
           matrix={matrix}
+          theme={theme}
         />
       </div>
     </div>
