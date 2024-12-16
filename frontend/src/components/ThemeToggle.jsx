@@ -5,7 +5,10 @@ const ThemeToggle = ({ theme, setTheme }) => {
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) setTheme(savedTheme);
-        else localStorage.setItem('theme', 'dark');
+        else {
+            localStorage.setItem('theme', 'dark');
+            setTheme('dark');
+        }
     }, []);
 
     useEffect(() => {
